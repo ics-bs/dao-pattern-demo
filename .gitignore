@@ -1,0 +1,4 @@
+target/
+.DS_Store
+.properties
+src/main/resources/config/config.properties
