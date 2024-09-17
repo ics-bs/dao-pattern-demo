@@ -1,34 +1,36 @@
 package se.lu.ics;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-import se.lu.ics.data.DaoException;
-import se.lu.ics.data.EmployeeDao;
-import se.lu.ics.models.Employee;
-
-public class Main {
-    public static void main(String[] args) {
-
-        // Test "Level 2" separation of concerns
-
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) {
         try {
+            String path = "/fxml/EmployeesView.fxml";
 
-            EmployeeDao employeeDao = new EmployeeDao();
+            // Load root layout from fxml file (on the classpath).
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            AnchorPane root = loader.load();
 
-            List<Employee> employees = employeeDao.findAll();
+            // Create a scene and set it on the stage
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
 
-            for (Employee employee : employees) {
-                System.out.println(employee.getEmpNo() + " " + employee.getEmpName() + " " + employee.getEmpSalary());
-            }
+            // Set the stage title and show it
+            primaryStage.setTitle("Employees");
+            primaryStage.show();
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (DaoException e) {
-            // TODO Auto-generated catch block
+        } catch (Exception e) {
+            // TODO: Error handling
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

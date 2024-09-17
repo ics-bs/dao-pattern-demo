@@ -7,5 +7,5 @@ module dao.pattern.demo {
     requires java.sql;
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
+    requires transitive javafx.graphics;
 }
