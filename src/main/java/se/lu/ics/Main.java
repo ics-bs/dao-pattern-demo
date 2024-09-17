@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import se.lu.ics.data.DaoException;
 import se.lu.ics.data.EmployeeDao;
 import se.lu.ics.models.Employee;
 
@@ -25,7 +26,7 @@ public class Main {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (DaoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
