@@ -17,6 +17,12 @@ import se.lu.ics.models.Employee;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller class for managing Employee-related operations in the view.
+ * This class interacts with the EmployeeDao to perform CRUD operations and 
+ * updates the UI (TableView) accordingly. It handles user actions such as 
+ * adding employees and loading employee data into the TableView.
+ */
 public class EmployeeController {
 
     @FXML
@@ -48,7 +54,12 @@ public class EmployeeController {
 
     private EmployeeDao employeeDao;
 
-        public EmployeeController() {
+    /**
+     * Constructor for EmployeeController.
+     * It initializes the EmployeeDao to manage database interactions. 
+     * If there is an error initializing the database, it will display an error message.
+     */
+    public EmployeeController() {
         try {
             employeeDao = new EmployeeDao();
         } catch (IOException e) {
@@ -56,35 +67,49 @@ public class EmployeeController {
         }
     }
 
-
+    /**
+     * Initializes the TableView by setting up the columns and loading the initial 
+     * list of employees from the database.
+     */
     @FXML
     public void initialize() {
-        // Set up table columns
+        // Set up table columns for displaying employee data
         tableColumnEmployeeNo.setCellValueFactory(new PropertyValueFactory<>("empNo"));
         tableColumnEmployeeName.setCellValueFactory(new PropertyValueFactory<>("empName"));
         tableColumnEmployeeSalary.setCellValueFactory(new PropertyValueFactory<>("empSalary"));
 
+        // Load employee data from the database
         loadEmployees();
     }
 
+    /**
+     * Handles the event when the "Add" button is clicked. 
+     * It reads the input from the text fields, creates a new Employee object,
+     * and saves it to the database using EmployeeDao. If successful, it refreshes
+     * the TableView to display the newly added employee.
+     *
+     * @param event MouseEvent triggered when the "Add" button is clicked.
+     */
     @FXML
     private void buttonEmployeeAdd_OnClick(MouseEvent event) {
         clearErrorMessage();
 
         try {
+            // Retrieve input from text fields
             String empNo = textFieldEmployeeNo.getText();
             String empName = textFieldEmployeeName.getText();
             double empSalary = Double.parseDouble(textFieldEmployeeSalary.getText());
 
+            // Create a new Employee object
             Employee newEmployee = new Employee(empNo, empName, empSalary);
 
-            // Save the employee using the DAO
+            // Save the new employee to the database
             employeeDao.save(newEmployee);
 
-            // Refresh the TableView after saving
+            // Refresh the TableView to display the new employee
             loadEmployees();
 
-            // Clear input fields after adding
+            // Clear input fields after successful addition
             textFieldEmployeeNo.clear(); 
             textFieldEmployeeName.clear();
             textFieldEmployeeSalary.clear();
@@ -95,22 +120,37 @@ public class EmployeeController {
         }
     }
 
+    /**
+     * Loads the list of employees from the database and populates the TableView.
+     * It retrieves all employees using the EmployeeDao and displays them in the table.
+     */
     private void loadEmployees() {
         clearErrorMessage();
         try {
+            // Fetch all employees from the database
             List<Employee> employeeList = employeeDao.findAll();
+            // Convert the list to an ObservableList for TableView
             ObservableList<Employee> employeeObservableList = FXCollections.observableArrayList(employeeList);
+            // Set the items in the TableView
             tableViewEmployee.setItems(employeeObservableList);
         } catch (DaoException e) {
             displayErrorMessage("Error loading employees: " + e.getMessage());
         }
     }
 
+    /**
+     * Displays an error message in the label and changes its text color to red.
+     *
+     * @param message The error message to display.
+     */
     private void displayErrorMessage(String message) {
         labelErrorMessage.setText(message);
         labelErrorMessage.setStyle("-fx-text-fill: red;");
     }
 
+    /**
+     * Clears any displayed error messages in the label.
+     */
     private void clearErrorMessage() {
         labelErrorMessage.setText("");
     }
