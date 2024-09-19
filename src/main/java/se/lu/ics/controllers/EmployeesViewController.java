@@ -29,7 +29,7 @@ public class EmployeesViewController {
     private TableView<Employee> tableViewEmployee;
 
     @FXML
-    private TableColumn<Employee, String> tableColumnEmployeeNo; 
+    private TableColumn<Employee, String> tableColumnEmployeeNumber; 
 
     @FXML
     private TableColumn<Employee, String> tableColumnEmployeeName;
@@ -38,7 +38,7 @@ public class EmployeesViewController {
     private TableColumn<Employee, Double> tableColumnEmployeeSalary;
 
     @FXML
-    private TextField textFieldEmployeeNo; 
+    private TextField textFieldEmployeeNumber; 
 
     @FXML
     private TextField textFieldEmployeeName;
@@ -74,9 +74,9 @@ public class EmployeesViewController {
     @FXML
     public void initialize() {
         // Set up table columns for displaying employee data
-        tableColumnEmployeeNo.setCellValueFactory(new PropertyValueFactory<>("empNo"));
-        tableColumnEmployeeName.setCellValueFactory(new PropertyValueFactory<>("empName"));
-        tableColumnEmployeeSalary.setCellValueFactory(new PropertyValueFactory<>("empSalary"));
+        tableColumnEmployeeNumber.setCellValueFactory(new PropertyValueFactory<>("employeeNumber"));
+        tableColumnEmployeeName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableColumnEmployeeSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
 
         // Load employee data from the database
         loadEmployees();
@@ -96,7 +96,7 @@ public class EmployeesViewController {
 
         try {
             // Retrieve input from text fields
-            String empNo = textFieldEmployeeNo.getText();
+            String empNo = textFieldEmployeeNumber.getText();
             String empName = textFieldEmployeeName.getText();
             double empSalary = Double.parseDouble(textFieldEmployeeSalary.getText());
 
@@ -110,7 +110,7 @@ public class EmployeesViewController {
             loadEmployees();
 
             // Clear input fields after successful addition
-            textFieldEmployeeNo.clear(); 
+            textFieldEmployeeNumber.clear(); 
             textFieldEmployeeName.clear();
             textFieldEmployeeSalary.clear();
         } catch (DaoException e) {

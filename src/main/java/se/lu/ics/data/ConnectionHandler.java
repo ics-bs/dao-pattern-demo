@@ -14,6 +14,7 @@ import java.util.Properties;
  */
 public class ConnectionHandler {
     private String connectionURL;
+    private final String propertiedFilePath = "/config/config.properties";
 
     /**
      * Constructor that initializes the connection URL by loading properties from a file.
@@ -27,7 +28,7 @@ public class ConnectionHandler {
         Properties connectionProperties = new Properties();
 
         // Load the configuration properties from the file in the classpath
-        try (InputStream inputStream = getClass().getResourceAsStream("/config/config.properties")) {
+        try (InputStream inputStream = getClass().getResourceAsStream(propertiedFilePath)) {
 
             // If the file is found, load the properties into the connectionProperties object
             if (inputStream != null) {

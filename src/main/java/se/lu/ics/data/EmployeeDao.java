@@ -61,9 +61,9 @@ public class EmployeeDao {
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
             // Set employee data into the prepared statement
-            statement.setString(1, employee.getEmpNo());
-            statement.setString(2, employee.getEmpName());
-            statement.setDouble(3, employee.getEmpSalary());
+            statement.setString(1, employee.getEmployeeNumber());
+            statement.setString(2, employee.getName());
+            statement.setDouble(3, employee.getSalary());
 
             // Execute the insert operation
             statement.executeUpdate();
@@ -72,7 +72,7 @@ public class EmployeeDao {
             if (e.getErrorCode() == 2627) {
                 throw new DaoException("An employee with this Employee No already exists.", e);
             } else {
-                throw new DaoException("Error saving employee: " + employee.getEmpNo(), e);
+                throw new DaoException("Error saving employee: " + employee.getEmployeeNumber(), e);
             }
         }
     }
@@ -92,16 +92,16 @@ public class EmployeeDao {
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
             // Set updated employee data into the prepared statement
-            statement.setString(1, employee.getEmpNo());
-            statement.setString(2, employee.getEmpName());
-            statement.setDouble(3, employee.getEmpSalary());
-            statement.setString(4, employee.getEmpNo());
+            statement.setString(1, employee.getEmployeeNumber());
+            statement.setString(2, employee.getName());
+            statement.setDouble(3, employee.getSalary());
+            statement.setString(4, employee.getEmployeeNumber());
 
             // Execute the update operation
             statement.executeUpdate();
         } catch (SQLException e) {
             // Throw a DaoException for any SQL errors
-            throw new DaoException("Error updating employee: " + employee.getEmpNo(), e);
+            throw new DaoException("Error updating employee: " + employee.getEmployeeNumber(), e);
         }
     }
 
@@ -113,20 +113,20 @@ public class EmployeeDao {
      * @param empNo The Employee No of the employee to be deleted.
      * @throws DaoException If there is an error deleting the employee.
      */
-    public void deleteByEmpNo(String empNo) {
+    public void deleteByEmployeeNumber(String employeeNumber) {
         String query = "DELETE FROM Employee WHERE EmpNo = ?";
 
         try (Connection connection = connectionHandler.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
             // Set Employee No in the prepared statement
-            statement.setString(1, empNo);
+            statement.setString(1, employeeNumber);
 
             // Execute the delete operation
             statement.executeUpdate();
         } catch (SQLException e) {
             // Throw a DaoException for SQL errors during deletion
-            throw new DaoException("Error deleting employee with Employee No: " + empNo, e);
+            throw new DaoException("Error deleting employee with Employee No: " + employeeNumber, e);
         }
     }
 

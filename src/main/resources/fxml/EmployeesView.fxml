@@ -13,7 +13,7 @@
         <TableView fx:id="tableViewEmployee" layoutX="102.0" layoutY="101.0" prefHeight="200.0"
             prefWidth="559.0">
             <columns>
-                <TableColumn fx:id="tableColumnEmployeeNo" prefWidth="75.0" text="Employee No" />
+                <TableColumn fx:id="tableColumnEmployeeNumber" prefWidth="75.0" text="Employee No" />
                 <TableColumn fx:id="tableColumnEmployeeName" prefWidth="75.0" text="Name" />
                 <TableColumn fx:id="tableColumnEmployeeSalary" prefWidth="75.0" text="Salary" />
             </columns>
@@ -21,7 +21,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <TextField fx:id="textFieldEmployeeNo" layoutX="102.0" layoutY="324.0"
+        <TextField fx:id="textFieldEmployeeNumber" layoutX="102.0" layoutY="324.0"
             promptText="Employee No" />
         <TextField fx:id="textFieldEmployeeName" layoutX="102.0" layoutY="367.0" promptText="Name" />
         <TextField fx:id="textFieldEmployeeSalary" layoutX="102.0" layoutY="410.0"

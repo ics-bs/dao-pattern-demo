@@ -1,37 +1,37 @@
 package se.lu.ics.models;
 
 public class Employee {
-    private String empNo;
-    private String empName;
-    private double empSalary;
+    private String employeeNumber;
+    private String name;
+    private double salary;
 
-    public Employee(String empNo, String empName, double empSalary) {
-        this.empNo = empNo;
-        this.empName = empName;
-        this.empSalary = empSalary;
+    public Employee(String employeeNumber, String name, double salary) {
+        this.employeeNumber = employeeNumber;
+        this.name = name;
+        this.salary = salary;
     }
 
-    public String getEmpNo() {
-        return empNo;
+    public String getEmployeeNumber() {
+        return employeeNumber;
     }
 
-    public String getEmpName() {
-        return empName;
+    public String getName() {
+        return name;
     }
 
-    public double getEmpSalary() {
-        return empSalary;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setEmpNo(String empNo) {
-        this.empNo = empNo;
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmpSalary(double empSalary) {
-        this.empSalary = empSalary;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 }
