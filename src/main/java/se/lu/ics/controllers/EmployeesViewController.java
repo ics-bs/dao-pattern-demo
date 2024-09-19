@@ -23,7 +23,7 @@ import java.util.List;
  * updates the UI (TableView) accordingly. It handles user actions such as 
  * adding employees and loading employee data into the TableView.
  */
-public class EmployeeController {
+public class EmployeesViewController {
 
     @FXML
     private TableView<Employee> tableViewEmployee;
@@ -59,7 +59,7 @@ public class EmployeeController {
      * It initializes the EmployeeDao to manage database interactions. 
      * If there is an error initializing the database, it will display an error message.
      */
-    public EmployeeController() {
+    public EmployeesViewController() {
         try {
             employeeDao = new EmployeeDao();
         } catch (IOException e) {
