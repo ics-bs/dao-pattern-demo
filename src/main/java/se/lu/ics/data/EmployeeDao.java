@@ -55,20 +55,20 @@ public class EmployeeDao {
      *                      Employee No already exists).
      */
     public void save(Employee employee) {
-        String query = "INSERT INTO Employee (EmpNo, EmpName, EmpSalary) VALUES (?, ?, ?)";
+        // Misuse of PreparedStatement: variables concatenated directly into the query
+        // string
+        String query = "INSERT INTO Employee (EmpNo, EmpName, EmpSalary) VALUES ("
+                + "'" + employee.getEmployeeNumber() + "', "
+                + "'" + employee.getName() + "', "
+                + employee.getSalary() + ")";
 
         try (Connection connection = connectionHandler.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
-            // Set employee data into the prepared statement
-            statement.setString(1, employee.getEmployeeNumber());
-            statement.setString(2, employee.getName());
-            statement.setDouble(3, employee.getSalary());
-
-            // Execute the insert operation
+            // No parameters set using placeholders
             statement.executeUpdate();
         } catch (SQLException e) {
-            // Check for unique constraint violation (SQL Server error code 2627)
+            // SQL Server-specific unique constraint violation error code
             if (e.getErrorCode() == 2627) {
                 throw new DaoException("An employee with this Employee No already exists.", e);
             } else {
